@@ -10,6 +10,9 @@ module.exports = {
         'uva': "url('https://i.imgur.com/5H72SXL.jpg')",
         'duva': "url('https://i.imgur.com/hW3QjjN.jpg')",
         'dpimentao': "url('https://i.imgur.com/8orZQY9.png')"
+      },
+      gridTemplateColumns: {
+        'vitaminContent': "2fr 5fr"
       }
     },
   },

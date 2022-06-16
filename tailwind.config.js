@@ -13,7 +13,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         'vitaminContent': "2fr 5fr"
-      }
+      },
     },
   },
   plugins: [],

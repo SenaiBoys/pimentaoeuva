@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 
 
 interface ViatminContent {
-  vitaminActive: "A" | "B1" | "C" ;
+  vitaminActive: "A" | "B1" | "C" | "K" ;
+  bVariants: ["B1" | "B2" | "B3" | "B"]
 }
 
-export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
-  const [vitamin, setVitamin] = useState<"A" | "B1" | "B2" | "B3" | "C" | "K">(vitaminActive);
+export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive, bVariants }) => {
+  const [vitamin, setVitamin] = useState<"A" | "B1" | "B2" | "B3"| "B6"| "C" | "K">(vitaminActive);
   
+console.log(vitamin)
+
   const content = {
     theme: {
       variant700: "fuchsia-700",
@@ -58,6 +61,17 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
       content.theme.border = "border-teal-400"
       content.theme.variant200 = "teal-200"
       break
+    case "B6":
+      content.specificName = "Niacina";
+      content.vitaminFunction = "Produção de energia e síntese de ácidos graxos e esteroides";
+      content.amount = "16mg/dia";
+      content.needs = "Erupções nos braços, mãos, pés, panturrilhas, pescoço e face, além de outras anomalias na pele";
+      content.exceeds = "Rubor, prurido e aumento da glicose sanguínea";
+      content.theme.variant700 = "teal-700"
+      content.theme.variant400 = "teal-400"
+      content.theme.border = "border-teal-400"
+      content.theme.variant200 = "teal-200"
+      break
     case "C":
       content.specificName = "Ácido ascórbico";
       content.vitaminFunction = "Antioxidante, aborção do ferro formação do colágeno";
@@ -68,6 +82,12 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
       content.theme.variant400 = "orange-400"
       content.theme.border = "border-orange-400"
       content.theme.variant200 = "orange-200"
+      break
+    case "K":  
+      content.theme.variant700 = "rose-700"
+      content.theme.variant400 = "rose-400"
+      content.theme.border = "border-rose-400"
+      content.theme.variant200 = "rose-200"
       break
   }
 
@@ -81,20 +101,14 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
         className={`relative h-full p-16 text-8xl top-0 left-0 transition-all rounded-lg bg-${content.theme.variant400} grid gap-8 text-center`}
       >
         <p className="self-center">{vitamin}</p>
-        {(vitamin === "B1" || vitamin === "B2" || vitamin === "B3") && 
+        {(vitamin === "B1" || vitamin === "B2" || vitamin === "B3" || vitamin === "B6") && 
           <div className="flex w-full justify-center gap-4 absolute bottom-4">
-            <div
-              onClick={() => setVitamin("B1")} 
-              className={`p-2 cursor-pointer rounded-full ${vitamin === "B1" ? `bg-teal-700` : `bg-teal-200`}`} 
-            />
-            <div
-              onClick={() => setVitamin("B2")} 
-              className={`p-2 cursor-pointer rounded-full ${vitamin === "B2" ? `bg-teal-700` : `bg-teal-200`}`} 
-            />
-            <div
-              onClick={() => setVitamin("B3")} 
-              className={`p-2 cursor-pointer  rounded-full ${vitamin === "B3" ? `bg-teal-700` : `bg-teal-200`}`} 
-            />
+            {bVariants.map(variant => (
+              <div
+                onClick={() => setVitamin(`${variant}` as any)} 
+                className={`p-2 cursor-pointer rounded-full ${vitamin === variant ? `bg-teal-700` : `bg-teal-200`}`} 
+              />
+            ))}
           </div>
         }
       </motion.div>

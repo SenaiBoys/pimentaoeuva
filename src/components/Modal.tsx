@@ -14,25 +14,26 @@ interface ModalProps {
 }
 
 export function Modal({ type, onClose }: ModalProps) {
-  const [vitaminActive, setVitaminActive] = useState<"A" | "B1" | "C" >("A");
+  const [vitaminActive, setVitaminActive] = useState<"A" | "B1" | "C" | "K">("B1");
   const modalRef = useRef<HTMLDivElement>(null);
 
   const content = {
     name: "Pimentão",
     group: "Capsicum annuum",
     description: "O pimentão é uma hortaliça usada na culinária do mundo todo, e é geralmente conhecido em três cores: vermelho, verde e amarelo. Suas vitaminas são:",
-    vitamins: ["A", "B", "C"],
+    vitamins: ["A", "B1", "C"],
+    bVariants: ["B1", "B2", "B3"],
     imgs: ['https://i.imgur.com/xCUGaPm.png', 'https://i.imgur.com/1q25Zxw.png', 'https://i.imgur.com/L75HoIB.png', 'https://i.imgur.com/Nr1FyeZ.png', 'https://i.imgur.com/F1KBiHl.png']
   }
 
   if(type === "uva") {
     content.name = "Uva";
     content.group = "Vitis vinifera"
-    content.description = "Descrição da uva",
-    content.vitamins = ["K", "B"]
-    content.imgs = ["link1", "link2"]
+    content.description = "A uva é o fruto da videira, geralmente usada para fazer geleia, vinho e passas, ou para ser consumida ao natural. Suas vitaminas são:",
+    content.vitamins = ["B1", "C", "K"],
+    content.bVariants = ["B1", "B2", "B3", "B6"],
+    content.imgs = ["https://i.imgur.com/lHdTxtw.png", "https://i.imgur.com/1qBKsc6.png", "https://i.imgur.com/etvRrUr.png", "https://i.imgur.com/YBQoPns.png", "https://i.imgur.com/3oXLJ25.png"]
   }
-  
   
   const handleCloseModal = useCallback(
     (e: any) => {
@@ -61,37 +62,25 @@ export function Modal({ type, onClose }: ModalProps) {
       >
         <h2 className="text-bold text-6xl">{content.name}</h2>
         <h4 className="italic font-extralight text-xl pb-8">{content.group}</h4>
-        <p className="m-t-6 text- xl text-xl">O pimentão é uma hortaliça usada na culinária do mundo todo, e é geralmente conhecido em três cores: vermelho, verde e amarelo. Suas vitaminas são:</p>
+        <p className="m-t-6 text- xl text-xl">{content.description}</p>
         <div className="flex py-4 justify-center gap-4">
-        <motion.div
-            whileHover={{ rotate: 360, scale: 1.2 }}
-            onClick={() => setVitaminActive("A")}
-            whileTap={{scale: [1.2, 1.5]}}
-            transition={{ type: "spring", velocity: 5 }}
-            className={`h-16 w-16 ${vitaminActive === "A" ? "opacity-100" : "opacity-40"} cursor-pointer rounded-lg bg-fuchsia-400 grid leading-[4rem] text-center`}
-          >
-            A
-            </motion.div>
-          <motion.div
-            whileTap={{scale: [1.2, 1.5]}}
-            transition={{ type: "spring", velocity: 5 }}
-            onClick={() => setVitaminActive("B1")}
-            className={`${vitaminActive === "B1" ? "opacity-100" : "opacity-40"} h-16 w-16 cursor-pointer rounded-lg bg-teal-400 grid leading-[4rem] text-center`}
-            whileHover={{rotate: 360, scale: 1.2}}
-          >
-            B
-          </motion.div>
-          <motion.div
-            whileHover={{rotate: 360, scale: 1.2}}
-            whileTap={{scale: [1.2, 1.5]}}
-            transition={{ type: "spring", velocity: 5 }}
-            onClick={() => setVitaminActive("C")}
-            className={`${vitaminActive === "C" ? "opacity-100" : "opacity-40"} h-16 w-16 cursor-pointer rounded-lg bg-orange-400 grid leading-[4rem] text-center`}
-          >
-            C
-          </motion.div>
+          {content.vitamins.map(vitamin => {
+            const rotateValues = [3, -3, 8, -8];
+            return (
+              <motion.div
+                key={vitamin}
+                whileHover={{ rotate: rotateValues[Math.floor(Math.random() * rotateValues.length)], scale: 1.20 }}
+                onClick={() => setVitaminActive(`${vitamin}` as any)}
+                whileTap={{scale: [1.2, 1.5]}}
+                transition={{ type: "spring", velocity: 2 }}
+                className={`h-16 text-4xl w-16 ${vitaminActive === vitamin ? "opacity-100" : "opacity-40"} cursor-pointer rounded-lg ${vitamin === "A" ? "bg-fuchsia-400" : vitamin === "B1" ? "bg-teal-400" : vitamin === "C" ? "bg-orange-400" : "bg-rose-400"} grid leading-[4rem] text-center`}
+              >
+                <p>{vitamin.replace("1", "")}</p>
+              </motion.div>
+            )
+          })}
         </div>
-          <VitaminContent vitaminActive={vitaminActive}/>
+          <VitaminContent bVariants={content.bVariants as any} vitaminActive={vitaminActive}/>
       <Swiper
         className="pt-8"
         spaceBetween={20}

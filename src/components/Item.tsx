@@ -14,6 +14,7 @@ export function Item({ type }: ItemProps) {
   const bg = type === "uva" ? `bg-[url('https://i.imgur.com/yWH1qJP.png')]` : "bg-[url('https://i.imgur.com/DT3c5GT.png')]"
 
   return (
+    <>
     <motion.div
       className={`
       relative
@@ -29,7 +30,7 @@ export function Item({ type }: ItemProps) {
       onMouseLeave={() => setHover(false)}
     >
       <motion.div
-        animate={hover ?{ opacity: 1 }: {opacity: 0.3}}
+        animate={hover ? { opacity: 1 }: {opacity: 0.3}}
         transition={{ type: "spring", velocity: 2, duration: 0.4}}
         className={`${bg} rounded-3xl ${type === "pimentao" ? "rounded-r-none" : "rounded-l-none"} transition-all z-10 w-full h-full bg-cover absolute top-0 left-0`}
       />
@@ -40,7 +41,8 @@ export function Item({ type }: ItemProps) {
       >
         {type === "pimentao" ? "Pimentão" : "Uva"}
       </motion.h2>
-      <AnimatePresence>{isModalOpen && <Modal onClose={() => setIsModalOpen(false)} type={type} />}</AnimatePresence>
     </motion.div>
+    <AnimatePresence>{isModalOpen && <Modal onClose={() => setIsModalOpen(false)} type={type} />}</AnimatePresence>
+    </>
   );
 }

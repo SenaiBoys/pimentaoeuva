@@ -87,7 +87,7 @@ export function ModalInfo({onClose}: ModalInfo) {
             <p>VINÍCIUS HACK</p>
           </motion.div>
         </motion.div>
-        <h4 className="italic font-extralight text-xl pb-4">Bibligrafia</h4>
+        <h4 className="italic font-extralight text-xl pb-4">Bibliografia</h4>
         <ul className="text-red-400 ml-5">
           <li className="list-disc list-inside hover:text-red-500 transition"><a href="https://www.einstein.br">Hospital Israelita Albert Einstein</a></li>
           <li className="list-disc list-inside hover:text-red-500 transition"><a href="https://www.msdmanuals.com">Manual MSD</a></li>

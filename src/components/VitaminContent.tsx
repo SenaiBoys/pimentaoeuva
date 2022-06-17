@@ -62,11 +62,11 @@ console.log(vitamin)
       content.theme.variant200 = "teal-200"
       break
     case "B6":
-      content.specificName = "Niacina";
-      content.vitaminFunction = "Produção de energia e síntese de ácidos graxos e esteroides";
-      content.amount = "16mg/dia";
-      content.needs = "Erupções nos braços, mãos, pés, panturrilhas, pescoço e face, além de outras anomalias na pele";
-      content.exceeds = "Rubor, prurido e aumento da glicose sanguínea";
+      content.specificName = "Piridoxina";
+      content.vitaminFunction = "Metabolismo dos açúcares, gorduras e proteínas";
+      content.amount = "1,3mg/dia";
+      content.needs = "Dermatite, erupções na pele, e formigamentos";
+      content.exceeds = "Polineuropatia (danificação nos nervos) e perda do senso de posição dos membros";
       content.theme.variant700 = "teal-700"
       content.theme.variant400 = "teal-400"
       content.theme.border = "border-teal-400"
@@ -74,7 +74,7 @@ console.log(vitamin)
       break
     case "C":
       content.specificName = "Ácido ascórbico";
-      content.vitaminFunction = "Antioxidante, aborção do ferro formação do colágeno";
+      content.vitaminFunction = "Antioxidante, aborção do ferro e formação do colágeno";
       content.amount = "90mg/dia";
       content.needs = "Cansaço, fraqueza e escorbuto (em casos graves)";
       content.exceeds = "Náuseas e diarréia, além de atrapalhar o sistema antioxidante do corpo";
@@ -83,7 +83,12 @@ console.log(vitamin)
       content.theme.border = "border-orange-400"
       content.theme.variant200 = "orange-200"
       break
-    case "K":  
+    case "K":
+      content.specificName = "Filoquinona";
+      content.vitaminFunction = "Coagulação sanguínea, fixação do cálcio e saúde cardiovascular/ dos ossos";
+      content.amount = "120mcg/dia";
+      content.needs = "Hemorragias na pele, nariz, estômago e intestino";
+      content.exceeds = "Anemia e icterícia";
       content.theme.variant700 = "rose-700"
       content.theme.variant400 = "rose-400"
       content.theme.border = "border-rose-400"

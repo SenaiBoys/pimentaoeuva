@@ -19,7 +19,6 @@ export function Item({ type }: ItemProps) {
       transition-all
       h-[calc(100vh-128px)]
       duration-300
-      rounded-xl ${type === "pimentao" ? "rounded-r-none" : "rounded-l-none"}
       ${hover ? "text-7xl" : !isModalOpen ? "text-[0]" : "text-7xl"}
     `}
       onClick={() => setIsModalOpen(true)}
@@ -27,7 +26,7 @@ export function Item({ type }: ItemProps) {
       onMouseLeave={() => setHover(false)}
     >
       <div
-        className={`${bg} duration-300 transition-all ${
+        className={`${bg} duration-300 rounded-3xl ${type === "pimentao" ? "rounded-r-none" : "rounded-l-none"} transition-all ${
           hover ? "opacity-70" : "opacity-100"
         } z-10 w-full h-full bg-cover absolute top-0 left-0`}
       />

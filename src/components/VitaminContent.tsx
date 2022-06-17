@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from "react";
+
 
 interface ViatminContent {
   vitaminActive: "A" | "B1" | "C" ;
@@ -9,28 +11,19 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
   
   const content = {
     theme: {
-      variant700: "teal-700",
-      variant400: "teal-400",
-      variant200: "teal-200"
+      variant700: "fuchsia-700",
+      variant400: "fuchsia-400",
+      variant200: "fuchsia-200",
+      border: "border-fuchsia-400"
     },
-    specificName: "",
-    vitaminFunction: "",
-    amount: "",
-    needs: "",
-    exceeds: "",
+    specificName: "Retinol",
+    vitaminFunction: "Visão",
+    amount: "600µg/dia",
+    needs: "Dificuldade para enxergar, infecções nos olhos (às vezes, fatais) e até mesmo cegueira",
+    exceeds: "Sono, dor de cabeça, náusea e vômito",
   }
 
   switch(vitamin) {
-    case "A":
-      content.specificName = "Retinol";
-      content.vitaminFunction = "Visão";
-      content.amount = "600µg/dia";
-      content.needs = "Dificuldade para enxergar, infecções nos olhos (às vezes, fatais) e até mesmo cegueira";
-      content.exceeds = "Sono, dor de cabeça, náusea e vômito";
-      content.theme.variant700 = "fuchsia-700"
-      content.theme.variant400 = "fuchsia-400"
-      content.theme.variant200 = "fuchsia-200"
-      break
     case "B1":
       content.specificName = "Tiamina";
       content.vitaminFunction = "Metabolismo de carboidratos e aminoácidos";
@@ -39,6 +32,7 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
       content.exceeds = "Fadiga, dor de cabeça, neuropatias, disfunções cardiovasculares e cerebrais";
       content.theme.variant700 = "teal-700";
       content.theme.variant400 = "teal-400";
+      content.theme.border = "border-teal-400";
       content.theme.variant200 = "teal-200";
       break
     case "B2":
@@ -49,6 +43,7 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
       content.exceeds = "Sensação de queimadura, sensibilidade à luz e diarreias";
       content.theme.variant700 = "teal-700"
       content.theme.variant400 = "teal-400"
+      content.theme.border = "border-teal-400"
       content.theme.variant200 = "teal-200"
       break
     
@@ -60,6 +55,7 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
       content.exceeds = "Rubor, prurido e aumento da glicose sanguínea";
       content.theme.variant700 = "teal-700"
       content.theme.variant400 = "teal-400"
+      content.theme.border = "border-teal-400"
       content.theme.variant200 = "teal-200"
       break
     case "C":
@@ -70,6 +66,7 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
       content.exceeds = "Náuseas e diarréia, além de atrapalhar o sistema antioxidante do corpo";
       content.theme.variant700 = "orange-700"
       content.theme.variant400 = "orange-400"
+      content.theme.border = "border-orange-400"
       content.theme.variant200 = "orange-200"
       break
   }
@@ -79,8 +76,8 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
   }, [vitaminActive])
   
   return (
-    <div className={`w-full rounded-2xl grid border-4 border-${content.theme.variant400} grid-cols-vitaminContent`}>
-      <div  
+    <div className={`w-full rounded-2xl grid border-4 ${content.theme.border} grid-cols-vitaminContent`}>
+      <motion.div  
         className={`relative h-full p-16 text-8xl top-0 left-0 transition-all rounded-lg bg-${content.theme.variant400} grid gap-8 text-center`}
       >
         <p className="self-center">{vitamin}</p>
@@ -100,7 +97,7 @@ export const VitaminContent: React.FC<ViatminContent> = ({ vitaminActive }) => {
             />
           </div>
         }
-      </div>
+      </motion.div>
       <section className="w-full flex flex-col gap-2 p-2 text-2xl"> {/*flex flex-col gap-4 */}
         <div className="">
           <h3>Nome específico: <span className="font-extralight text-xl">{content.specificName}</span></h3>

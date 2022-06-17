@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Autoplay, Pagination } from "swiper";
 import "swiper/css";
@@ -13,7 +14,7 @@ interface ModalProps {
 }
 
 export function Modal({ type, onClose }: ModalProps) {
-  const [vitaminActive, setVitaminActive] = useState<"A" | "B1" | "C" >("B1");
+  const [vitaminActive, setVitaminActive] = useState<"A" | "B1" | "C" >("A");
   const modalRef = useRef<HTMLDivElement>(null);
 
   const content = {
@@ -26,8 +27,12 @@ export function Modal({ type, onClose }: ModalProps) {
 
   if(type === "uva") {
     content.name = "Uva";
-    content.group = "Rebellus capiscus"
+    content.group = "Vitis vinifera"
+    content.description = "Descrição da uva",
+    content.vitamins = ["K", "B"]
+    content.imgs = ["link1", "link2"]
   }
+  
   
   const handleCloseModal = useCallback(
     (e: any) => {
@@ -46,32 +51,45 @@ export function Modal({ type, onClose }: ModalProps) {
 
   return (
     <div className="fixed z-50 top-0 left-0 w-full grid place-items-center min-h-screen bg-[rgba(3,3,3,0.5)]">
-      <div
+      <motion.div
+        animate={{ scale: [0, 1]}}
+        // exit={{ scale: 0 }}
+        transition={{ type: "spring", stiffness: 100, duration: 0.3 }}
         className="text-normal my-4 w-[1000px] p-4 z-90 bg-zinc-700 drop-shadow-xl rounded-2xl"
         ref={modalRef}
+        
       >
         <h2 className="text-bold text-6xl">{content.name}</h2>
         <h4 className="italic font-extralight text-xl pb-8">{content.group}</h4>
         <p className="m-t-6 text- xl text-xl">O pimentão é uma hortaliça usada na culinária do mundo todo, e é geralmente conhecido em três cores: vermelho, verde e amarelo. Suas vitaminas são:</p>
-        <div className="flex py-4 justify-center gap-2">
-         <div 
+        <div className="flex py-4 justify-center gap-4">
+        <motion.div
+            whileHover={{ rotate: 360, scale: 1.2 }}
             onClick={() => setVitaminActive("A")}
-            className="h-16 w-16 cursor-pointer hover:brightness-90 transition-all rounded-lg bg-fuchsia-400 grid leading-[4rem] text-center"
+            whileTap={{scale: [1.2, 1.5]}}
+            transition={{ type: "spring", velocity: 5 }}
+            className={`h-16 w-16 ${vitaminActive === "A" ? "opacity-100" : "opacity-40"} cursor-pointer rounded-lg bg-fuchsia-400 grid leading-[4rem] text-center`}
           >
             A
-            </div>
-          <div
+            </motion.div>
+          <motion.div
+            whileTap={{scale: [1.2, 1.5]}}
+            transition={{ type: "spring", velocity: 5 }}
             onClick={() => setVitaminActive("B1")}
-            className="h-16 w-16 cursor-pointer hover:brightness-90 transition-all rounded-lg bg-teal-400 grid leading-[4rem] text-center"
+            className={`${vitaminActive === "B1" ? "opacity-100" : "opacity-40"} h-16 w-16 cursor-pointer rounded-lg bg-teal-400 grid leading-[4rem] text-center`}
+            whileHover={{rotate: 360, scale: 1.2}}
           >
             B
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            whileHover={{rotate: 360, scale: 1.2}}
+            whileTap={{scale: [1.2, 1.5]}}
+            transition={{ type: "spring", velocity: 5 }}
             onClick={() => setVitaminActive("C")}
-            className="h-16 w-16 cursor-pointer hover:brightness-90 transition-all rounded-lg bg-orange-400 grid leading-[4rem] text-center"
+            className={`${vitaminActive === "C" ? "opacity-100" : "opacity-40"} h-16 w-16 cursor-pointer rounded-lg bg-orange-400 grid leading-[4rem] text-center`}
           >
             C
-          </div>
+          </motion.div>
         </div>
           <VitaminContent vitaminActive={vitaminActive}/>
       <Swiper
@@ -87,7 +105,7 @@ export function Modal({ type, onClose }: ModalProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      </div>
+      </motion.div>
     </div>
   );
 }
